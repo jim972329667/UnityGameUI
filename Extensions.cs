@@ -1,14 +1,13 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Object = UnityEngine.Object;
 
 namespace UnityGameUI
 {
     internal delegate bool d_LoadImage(IntPtr tex, IntPtr data, bool markNonReadable);
     internal delegate bool parseHTMLString(IntPtr HTMLString, IntPtr result);
 
-    internal static class Extensions
+    public static class Extensions
     {
         // Load Image ICall
 

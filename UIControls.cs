@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 namespace UnityGameUI
 {
     // UI 控件
-    internal class UIControls : MonoBehaviour
+    public class UIControls : MonoBehaviour
     {
         #region[声明]
         private const float kWidth = 160f;

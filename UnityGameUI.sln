@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UnityGameUI", "UnityGameUI.shproj", "{F186AC5D-269F-4856-9479-013940A0DD5F}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B844ED69-7EB5-4442-AE50-746EA7E2F4F2}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		UnityGameUI.projitems*{f186ac5d-269f-4856-9479-013940a0dd5f}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal

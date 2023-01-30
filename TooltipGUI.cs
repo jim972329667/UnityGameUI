@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace UnityGameUI
 {
-    internal class TooltipGUI : MonoBehaviour
+    public class TooltipGUI : MonoBehaviour
     {
-       public bool EnableTooltip = false;
+        public bool EnableTooltip = false;
         public string Tooltip = "";
         public float WindowSizeFactor = 1;
         public GameObject target = null;

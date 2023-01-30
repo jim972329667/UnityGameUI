@@ -1,12 +1,10 @@
-﻿
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnityGameUI
 {
     // : MonoBehaviour
-    internal static class UINavigation
+    public static class UINavigation
     {
         #region[全局参数]
 

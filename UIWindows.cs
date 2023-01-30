@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 namespace UnityGameUI
 {
-    internal class UIWindows
+    public class UIWindows
     {
         public UIWindows()
         {
 
         }
 
+        // 输入对话框
         // 输入对话框
         public static void SpawnInputDialog(string prompt, string title, string defaultText, Action<string> onFinish)
         {
@@ -26,7 +25,7 @@ namespace UnityGameUI
 
             GameObject uiPanel = UIControls.createUIPanel(canvas, "70", "300", null);  // 创建面板
             uiPanel.GetComponent<Image>().color = UIControls.HTMLString2Color("#37474FFF"); // 设置背景颜色
-           
+
             // 创建标题
             Sprite txtBgSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#7AB900FF"));
             GameObject uiText = UIControls.createUIText(uiPanel, txtBgSprite, "#FFFFFFFF");
@@ -58,18 +57,18 @@ namespace UnityGameUI
         }
 
         // 带下拉框的对话框
-        public static void SpawnDropdownDialog(string prompt, string title, List<string> options,  Action<int> onFinish)
+        public static void SpawnDropdownDialog(string prompt, string title, List<string> options, Action<int> onFinish)
         {
             GameObject canvas = UIControls.createUICanvas();    // 创建画布
             Object.DontDestroyOnLoad(canvas);
             // 设置置顶显示
             canvas.GetComponent<Canvas>().overrideSorting = true;
             canvas.GetComponent<Canvas>().sortingOrder = 100;
-            
+
 
             GameObject uiPanel = UIControls.createUIPanel(canvas, "70", "300", null);  // 创建面板
             uiPanel.GetComponent<Image>().color = UIControls.HTMLString2Color("#37474FFF"); // 设置背景颜色
-            
+
 
             // 创建标题
             Sprite txtBgSprite = UIControls.createSpriteFrmTexture(UIControls.createDefaultTexture("#7AB900FF"));

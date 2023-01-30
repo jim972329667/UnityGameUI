@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UnityGameUI
 {
-    internal class DragAndDrog : MonoBehaviour
+    public class DragAndDrog : MonoBehaviour
     {
         public GameObject target;
         public bool isMouseDrag;
