@@ -1,4 +1,3 @@
-﻿
 using System;
 using UnityEngine;
 
@@ -6,26 +5,34 @@ namespace UnityGameUI
 {
     internal class TooltipGUI : MonoBehaviour
     {
-        public static TooltipGUI instance = null;
-        public static bool EnableTooltip = true;
-        public static string Tooltip = "";
-        private static GUIStyle tooltipStyle;
-        private static bool fired = false;  // 调试信息
+       public bool EnableTooltip = false;
+        public string Tooltip = "";
+        public float WindowSizeFactor = 1;
+        public GameObject target = null;
+        private GUIStyle tooltipStyle;
 
-        public TooltipGUI()
+        public void Update()
         {
-            //BepInExLoader.log.LogMessage("TooltipGUI Loaded");
-            instance = this;
-        }
+            var mousepos = UnityEngine.Input.mousePosition;
 
-        public void OnGUI()
-        {
-            if (!fired)
+            if (target != null)
             {
-                Debug.Log("TooltipGUI OnGUI Fired");
-                fired = true;
+                Vector2 size = target.GetComponent<RectTransform>().rect.size;
+                if (mousepos.x < target.transform.position.x + size.x * WindowSizeFactor / 2 && mousepos.x > target.transform.position.x - size.x * WindowSizeFactor / 2)
+                {
+                    if (mousepos.y < target.transform.position.y + size.y * WindowSizeFactor / 2 && mousepos.y > target.transform.position.y - size.y * WindowSizeFactor / 2)
+                    {
+                        EnableTooltip = true;
+                        return;
+                    }
+                }
             }
 
+            EnableTooltip = false;
+        }
+        public void OnGUI()
+        {
+            var mousepos = UnityEngine.Input.mousePosition;
             if (Tooltip != "" && EnableTooltip == true)
             {
                 GUI.backgroundColor = Color.black;
@@ -33,13 +40,13 @@ namespace UnityGameUI
 
                 tooltipStyle = new GUIStyle(GUI.skin.box);
                 tooltipStyle.normal.textColor = Color.white;
+                tooltipStyle.fontSize = (int)(18 * WindowSizeFactor);
 
                 float width = tooltipStyle.CalcSize(content).x;
                 float height = tooltipStyle.CalcSize(content).y;
 
-                var mousepos = UnityEngine.Input.mousePosition;
                 //var mousepos = EventSystem.current.currentInputModule.input.mousePosition; // Instead of Input.mousePosition
-                GUI.Box(new Rect(mousepos.x + 15, Screen.height - mousepos.y + 15, width, 25), content, tooltipStyle); // The +15 are cursor offsets                
+                GUI.Box(new Rect(mousepos.x + 15, Screen.height - mousepos.y + 15, width, Math.Max(25f, height)), content, tooltipStyle); // The +15 are cursor offsets                
             }
         }
     }
