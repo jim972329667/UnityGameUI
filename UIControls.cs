@@ -1,4 +1,3 @@
-﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -105,15 +104,20 @@ namespace UnityGameUI
         public static GameObject CreatePanel(UIControls.Resources resources)
         {
             GameObject gameObject = UIControls.CreateUIElementRoot("Panel", UIControls.s_ThickElementSize);
-            RectTransform component = gameObject.GetComponent<RectTransform>();
-            component.anchorMin = Vector2.zero;
-            component.anchorMax = Vector2.one;
-            component.anchoredPosition = Vector2.zero;
-            component.sizeDelta = Vector2.zero;
+
             Image image = gameObject.AddComponent<Image>();
             image.sprite = resources.background;
             image.type = Image.Type.Sliced;
             image.color = UIControls.s_PanelColor;
+
+            RectTransform component = gameObject.GetComponent<RectTransform>();
+            //component.anchorMin = Vector2.zero;
+            //component.anchorMax = Vector2.one;
+            ////component.anchoredPosition = Vector2.zero;
+            //component.sizeDelta = Vector2.zero;
+
+            gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 40);
+
             return gameObject;
         }
 
@@ -416,13 +420,13 @@ namespace UnityGameUI
             text.text = options[0];
             foreach (var item in options)
             {
-                
+
                 dropdown.options.Add(new Dropdown.OptionData
                 {
                     text = item
                 });
             }
-            
+
             //text.text = "Option A";
             //dropdown.options.Add(new Dropdown.OptionData
             //{
@@ -612,7 +616,7 @@ namespace UnityGameUI
 
 
         // 创建画布
-        public static GameObject createUICanvas()
+        public static GameObject createUICanvas(float Factor = 1)
         {
             Debug.Log("创建画布");
 
@@ -622,15 +626,19 @@ namespace UnityGameUI
 
             // 传入 Canvas 类型
             Canvas canvas = CanvasGO.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
             CanvasScaler cs = CanvasGO.AddComponent<CanvasScaler>();
             cs.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
             cs.referencePixelsPerUnit = 100f;
             cs.referenceResolution = new Vector2(1024f, 788f);
+            cs.scaleFactor = Factor;
+
+            //CanvasGroup cg = CanvasGO.AddComponent<CanvasGroup>();
+            //cg.alpha = 0.65f;
 
             GraphicRaycaster gr = CanvasGO.AddComponent<GraphicRaycaster>();
-            ;
+
             return CanvasGO;
         }
 
@@ -648,13 +656,15 @@ namespace UnityGameUI
 
             RectTransform rectTransform = uiPanel.GetComponent<RectTransform>();
 
-            float size;
-            size = Single.Parse(height); // 它们在 Unhollower 中没有浮动支持，这样可以避免错误
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
-            size = Single.Parse(width);
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
+            //float size;
+            //size = Single.Parse(height); // 它们在 Unhollower 中没有浮动支持，这样可以避免错误
+            //rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);
+            //size = Single.Parse(width);
+            //rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
             // 您也可以使用 rectTransform.sizeDelta = new Vector2(width, height);
-
+            float height2 = Single.Parse(height);
+            float width2 = Single.Parse(width);
+            rectTransform.sizeDelta = new Vector2(width2, height2);
             return uiPanel;
         }
 
@@ -806,7 +816,7 @@ namespace UnityGameUI
         }
 
         // 创建文本
-        public static GameObject createUIText(GameObject parent, Sprite BgSprite, string textColor = null )
+        public static GameObject createUIText(GameObject parent, Sprite BgSprite, string textColor)
         {
             UIControls.Resources uiResources = new UIControls.Resources();
             uiResources.background = BgSprite;
@@ -816,7 +826,7 @@ namespace UnityGameUI
             uiText.transform.SetParent(parent.transform, false);
 
             //uiText.transform.GetChild(0).GetComponent<Text>().font = (Font)Resources.GetBuiltinResource<Font>("Arial.ttf"); // 设置字体
-            if (textColor != null) uiText.GetComponent<Text>().color = HTMLString2Color(textColor);
+            uiText.GetComponent<Text>().color = HTMLString2Color(textColor);
             return uiText;
         }
 
