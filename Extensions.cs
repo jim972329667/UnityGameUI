@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
@@ -33,7 +33,6 @@ namespace UnityGameUI
             }
             return new Color32(r, g, b, a);
         }
-
         public static int ConvertToIntDef(this string input, int defaultValue)
         {
             int result;
@@ -42,6 +41,32 @@ namespace UnityGameUI
                 return result;
             }
             return defaultValue;
+        }
+        public static float ConvertToFloatDef(this string input, float defaultValue)
+        {
+            float result;
+            if (float.TryParse(input, out result))
+            {
+                return result;
+            }
+            return defaultValue;
+        }
+        public static List<string> GetSeparateSubString(this string input, int charNumber)
+        {
+            List<string> arrlist = new List<string>();
+            string tempStr = input;
+            for (int i = 0; i < tempStr.Length; i += charNumber)
+            {
+                if ((tempStr.Length - i) > charNumber)//如果是，就截取
+                {
+                    arrlist.Add(tempStr.Substring(i, charNumber));
+                }
+                else
+                {
+                    arrlist.Add(tempStr.Substring(i));//如果不是，就截取最后剩下的那部分
+                }
+            }
+            return arrlist;
         }
 
     }
